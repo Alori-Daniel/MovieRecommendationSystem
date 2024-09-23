@@ -59,9 +59,13 @@ const MainPage = ({ category, mainPage, series }) => {
   const getSearchData = async (query) => {
     setLoading(true);
     try {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=6522eb56ca3e1a27a115cef700d64b8e&language=en-US&query=${query}`
-      );
+      let url = "";
+      if (series) {
+        url = `https://api.themoviedb.org/3/search/tv?api_key=6522eb56ca3e1a27a115cef700d64b8e&language=en-US&query=${query}`;
+      } else {
+        url = `https://api.themoviedb.org/3/search/movie?api_key=6522eb56ca3e1a27a115cef700d64b8e&language=en-US&query=${query}`;
+      }
+      const response = await fetch(url);
       if (response.ok) {
         const result = await response.json();
         console.log(result.results);

@@ -104,7 +104,7 @@ const Movies = ({ data, loading, setCount, genres, setGenre }) => {
                 />
                 <div className="flex justify-between flex-wrap">
                   <h3 className="text-md text-[#1E195A] font-medium max-w-32 ">
-                    {movie.original_title}
+                    {movie.original_title || movie.original_name}
                   </h3>
                   <p className="">
                     {Array.from({ length: 5 }, (_, i) => {
@@ -130,7 +130,7 @@ const Movies = ({ data, loading, setCount, genres, setGenre }) => {
                     })}
                   </p>
                 </div>
-                <p>Date: {movie.release_date}</p>
+                <p>Date: {movie.release_date || movie.first_air_date}</p>
                 <p className="p-2 rounded-lg border-2 cursor-pointer">
                   {getGenreNames(movie.genre_ids)}
                 </p>
