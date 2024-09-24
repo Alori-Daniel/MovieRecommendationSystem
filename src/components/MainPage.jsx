@@ -8,6 +8,9 @@ const MainPage = ({
   series,
   movieClicked,
   setMovieClicked,
+  setNavShow,
+  navShow,
+  selection,
 }) => {
   const [movieData, setMovieData] = useState([]);
   const [searchItem, setSearchItem] = useState("");
@@ -102,9 +105,17 @@ const MainPage = ({
   }, [count, category, selectedGenre]);
 
   return (
-    <div className=" w-4/5 bg-white ml-[20%] border-2 border-green-400 px-24 py-8 ">
+    <div className=" w-4/5 bg-white ml-[20%] border-2 border-green-400 px-24 py-8 lg:ml-0 lg:w-full relative md:py-5 md:px-5 ">
+      <div
+        className="absolute top-7 left-10 hidden lg:block sm:left-4"
+        onClick={() => {
+          setNavShow((prev) => !prev), console.log(navShow);
+        }}
+      >
+        <i className="bx bx-menu text-3xl hover:scale-105 cursor-pointer hover:rotate-180 transition-transform"></i>
+      </div>
       <div className="navbar flex items-center justify-between">
-        <div className="relative rounded-md w-56">
+        <div className="relative rounded-md w-56  md:ml-auto xi:w-40">
           <i className="bx bx-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-xl"></i>
           <input
             type="text"
@@ -114,7 +125,7 @@ const MainPage = ({
             onChange={handleInputChange}
           />
         </div>
-        <ul className="flex gap-3 text-[#382E6B]">
+        <ul className="flex gap-3 text-[#382E6B] md:hidden">
           <li>Films</li>
           <li>Socials</li>
           <li>Videos</li>
@@ -130,6 +141,7 @@ const MainPage = ({
         setGenre={setSelectedGenre}
         movieClicked={movieClicked}
         setMovieClicked={setMovieClicked}
+        selection={selection}
       />
     </div>
   );

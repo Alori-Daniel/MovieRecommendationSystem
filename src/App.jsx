@@ -10,6 +10,8 @@ function App() {
   const [mainPage, setMainPage] = useState(true);
   const [series, setSeries] = useState(false);
   const [movieClicked, setMovieClicked] = useState(false);
+  const [navShow, setNavShow] = useState(false);
+  const [selection, setSelection] = useState("Discover");
 
   return (
     <div className="flex ">
@@ -24,13 +26,19 @@ function App() {
                   setCategory={setCategory}
                   setMainPage={setMainPage}
                   setSeries={setSeries}
+                  navShow={navShow}
+                  setNavShow={setNavShow}
+                  setSelection={setSelection}
                 />
                 <MainPage
                   category={category}
                   mainPage={mainPage}
                   series={series}
                   movieClicked={movieClicked}
+                  navShow={navShow}
                   setMovieClicked={setMovieClicked}
+                  setNavShow={setNavShow}
+                  selection={selection}
                 />
               </>
             }

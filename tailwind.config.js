@@ -17,8 +17,16 @@ export default {
 
       sm: { max: "639px" },
       // => @media (max-width: 639px) { ... }
+      mi: { max: "510px" },
+      xi: { max: "360px" },
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        // Adding the custom font
+        vollkorn: ["Vollkorn", "serif"],
+        poppins: ["Poppins", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };

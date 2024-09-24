@@ -11,6 +11,7 @@ const Movies = ({
   setGenre,
   movieClicked,
   setMovieClicked,
+  selection,
 }) => {
   const navigate = useNavigate();
 
@@ -25,18 +26,22 @@ const Movies = ({
   const handlePageChange = (page) => {
     setCount(page);
   };
+  const handleMovieClick = (movie) => {
+    const genreNames = getGenreNames(movie.genre_ids);
+    navigate("/movieinfo", { state: { movie, genreNames } });
+  };
   return (
     <div className="w-full  flex flex-col items-center gap-2 ">
-      <div className="flex w-full justify-between  my-8 items-center  p-4">
+      <div className="flex w-full justify-between  my-8 items-center gap-2   p-4 lg:flex-col">
         <h2
-          className="text-2xl "
+          className="text-2xl font-vollkorn "
           onClick={() => {
             console.log(data);
           }}
         >
-          AJ Movies
+          {selection}
         </h2>
-        <div className="flex gap-6 self-center">
+        <div className="grid gap-6 self-center grid-cols-5 mi:grid-cols-3 xi:grid-cols-2">
           <p
             className="px-2 py-2 rounded-lg border-2 cursor-pointer hover:bg-blue-950 hover:text-white"
             onClick={() => setGenre(28)}
@@ -68,38 +73,6 @@ const Movies = ({
             Horror
           </p>
         </div>
-        {/* <div className="flex gap-6 flex-wrap">
-          <select name="games" id="games" className="px-6 py-2 rounded-full">
-            <option value="">All Games</option>
-            <option value="game1">Game 1</option>
-            <option value="game2">Game 2</option>
-            <option value="game3">Game 3</option>
-          </select>
-          <select name="games" id="games" className="px-6 py-2 rounded-full">
-            <option value="">All Language</option>
-            <option value="game1">Game 1</option>
-            <option value="game2">Game 2</option>
-            <option value="game3">Game 3</option>
-          </select>
-          <select name="games" id="games" className="px-6 py-2 rounded-full">
-            <option value="">All Countries</option>
-            <option value="game1">Game 1</option>
-            <option value="game2">Game 2</option>
-            <option value="game3">Game 3</option>
-          </select>
-          <select name="games" id="games" className="px-6 py-2 rounded-full">
-            <option value="">All Rating</option>
-            <option value="game1">Game 1</option>
-            <option value="game2">Game 2</option>
-            <option value="game3">Game 3</option>
-          </select>
-          <select name="games" id="games" className="px-6 py-2 rounded-full">
-            <option value="">Sort by</option>
-            <option value="game1">Game 1</option>
-            <option value="game2">Game 2</option>
-            <option value="game3">Game 3</option>
-          </select>
-        </div> */}
       </div>
       {loading ? (
         <p>Loading movies.....</p>
@@ -112,7 +85,7 @@ const Movies = ({
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   className="rounded-2xl shadow-lg hover:scale-105 hover:cursor-pointer transition-transform object-fill"
                   alt=""
-                  onClick={() => navigate("/movieinfo", { state: { movie } })}
+                  onClick={() => handleMovieClick(movie)}
                 />
                 <div className="flex justify-between flex-wrap">
                   <h3 className="text-md text-[#1E195A] font-medium max-w-32 ">

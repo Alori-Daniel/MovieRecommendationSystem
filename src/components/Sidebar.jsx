@@ -2,13 +2,34 @@ import React from "react";
 import "boxicons/css/boxicons.min.css";
 import { useNavigate } from "react-router-dom";
 
-const Sidebar = ({ setCategory, setMainPage, setSeries }) => {
+const Sidebar = ({
+  setCategory,
+  setMainPage,
+  setSeries,
+  navShow,
+  setNavShow,
+  setSelection,
+}) => {
   const navigate = useNavigate();
   return (
-    <div className="h-screen bg-blue-950 w-1/5 	border-gray-900 sm:w-2/5 flex flex-col items-center py-8 text-white fixed top-0 left-0">
+    <div
+      className={`h-screen bg-blue-950 w-1/5 border-gray-900  flex flex-col items-center py-8 text-white fixed top-0 left-0 z-10 lg:w-64 sm:w-56 sm:overflow-y-auto transition-all duration-400 ease-in-out ${
+        navShow ? "lg:left-0" : "lg:-left-full"
+      }`}
+    >
+      {navShow ? (
+        <div
+          className="absolute top-6 right-5"
+          onClick={() => setNavShow((prev) => !prev)}
+        >
+          <i class="bx bx-x-circle text-2xl cursor-pointer"></i>
+        </div>
+      ) : (
+        ""
+      )}
       <div className=" w-full p-2 flex flex-col gap-4 h-screen ">
-        <div className="flex flex-col gap-6  w-4/5 mx-auto md:w-full px-6">
-          <h1 className="text-3xl font-bold text-white mb-4 lg:text-2xl">
+        <div className="flex flex-col gap-6  w-4/5 mx-auto md:w-full px-6 font-vollkorn">
+          <h1 className="text-3xl font-bold text-white mb-4 lg:text-2xl font-vollkorn">
             AJMOVIES
           </h1>
           <p
@@ -18,6 +39,7 @@ const Sidebar = ({ setCategory, setMainPage, setSeries }) => {
               setCategory("discover");
               setMainPage(true);
               setSeries(false);
+              setSelection("Discover");
             }}
           >
             Films
@@ -29,6 +51,7 @@ const Sidebar = ({ setCategory, setMainPage, setSeries }) => {
               setCategory("tv_shows");
               setMainPage(false);
               setSeries(true);
+              setSelection("Tv Shows");
             }}
           >
             Series
@@ -48,6 +71,7 @@ const Sidebar = ({ setCategory, setMainPage, setSeries }) => {
                   setCategory("popular");
                   setMainPage(false);
                   setSeries(false);
+                  setSelection("Popular");
                 }}
               >
                 Popular
@@ -61,6 +85,7 @@ const Sidebar = ({ setCategory, setMainPage, setSeries }) => {
                   setCategory("top_rated");
                   setMainPage(false);
                   setSeries(false);
+                  setSelection("Top Rated");
                 }}
               >
                 Top Rated
@@ -74,6 +99,7 @@ const Sidebar = ({ setCategory, setMainPage, setSeries }) => {
                   setCategory("upcoming");
                   setMainPage(false);
                   setSeries(false);
+                  setSelection("Upcoming");
                 }}
               >
                 Upcoming
@@ -87,6 +113,7 @@ const Sidebar = ({ setCategory, setMainPage, setSeries }) => {
                   setCategory("now_playing");
                   setMainPage(false);
                   setSeries(false);
+                  setSelection("Now Playing");
                 }}
               >
                 Now Playing
@@ -100,6 +127,7 @@ const Sidebar = ({ setCategory, setMainPage, setSeries }) => {
                   setCategory("tv_shows");
                   setMainPage(false);
                   setSeries(true);
+                  setSelection("Tv Shows");
                 }}
               >
                 Tv Shows
