@@ -1,8 +1,19 @@
 import React, { useEffect, useState } from "react";
 import havert from "../assets/havert.jpeg";
 import { Pagination } from "antd";
+import { useNavigate } from "react-router-dom";
 
-const Movies = ({ data, loading, setCount, genres, setGenre }) => {
+const Movies = ({
+  data,
+  loading,
+  setCount,
+  genres,
+  setGenre,
+  movieClicked,
+  setMovieClicked,
+}) => {
+  const navigate = useNavigate();
+
   const getGenreNames = (genre_ids) => {
     return genre_ids
       .map((id) => {
@@ -101,6 +112,7 @@ const Movies = ({ data, loading, setCount, genres, setGenre }) => {
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   className="rounded-2xl shadow-lg hover:scale-105 hover:cursor-pointer transition-transform object-fill"
                   alt=""
+                  onClick={() => navigate("/movieinfo", { state: { movie } })}
                 />
                 <div className="flex justify-between flex-wrap">
                   <h3 className="text-md text-[#1E195A] font-medium max-w-32 ">

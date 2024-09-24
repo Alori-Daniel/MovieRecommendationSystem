@@ -1,7 +1,9 @@
 import React from "react";
 import "boxicons/css/boxicons.min.css";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = ({ setCategory, setMainPage, setSeries }) => {
+  const navigate = useNavigate();
   return (
     <div className="h-screen bg-blue-950 w-1/5 	border-gray-900 sm:w-2/5 flex flex-col items-center py-8 text-white fixed top-0 left-0">
       <div className=" w-full p-2 flex flex-col gap-4 h-screen ">
@@ -12,6 +14,7 @@ const Sidebar = ({ setCategory, setMainPage, setSeries }) => {
           <p
             className="text-lg	font-medium hover:text-yellow-300 hover:cursor-pointer"
             onClick={() => {
+              navigate("/");
               setCategory("discover");
               setMainPage(true);
               setSeries(false);
@@ -22,6 +25,7 @@ const Sidebar = ({ setCategory, setMainPage, setSeries }) => {
           <p
             className="text-lg	font-medium hover:text-yellow-300 hover:cursor-pointer"
             onClick={() => {
+              navigate("/");
               setCategory("tv_shows");
               setMainPage(false);
               setSeries(true);
@@ -40,6 +44,7 @@ const Sidebar = ({ setCategory, setMainPage, setSeries }) => {
               <i className="bx bx-film text-2xl font-thin"></i>
               <p
                 onClick={() => {
+                  navigate("/");
                   setCategory("popular");
                   setMainPage(false);
                   setSeries(false);
@@ -52,6 +57,7 @@ const Sidebar = ({ setCategory, setMainPage, setSeries }) => {
               <i className="bx bx-barcode text-2xl font-thin "></i>
               <p
                 onClick={() => {
+                  navigate("/");
                   setCategory("top_rated");
                   setMainPage(false);
                   setSeries(false);
@@ -64,6 +70,7 @@ const Sidebar = ({ setCategory, setMainPage, setSeries }) => {
               <i className="bx bx-movie text-2xl font-thin "></i>
               <p
                 onClick={() => {
+                  navigate("/");
                   setCategory("upcoming");
                   setMainPage(false);
                   setSeries(false);
@@ -76,6 +83,7 @@ const Sidebar = ({ setCategory, setMainPage, setSeries }) => {
               <i className="bx bx-movie-play text-2xl font-thin "></i>
               <p
                 onClick={() => {
+                  navigate("/");
                   setCategory("now_playing");
                   setMainPage(false);
                   setSeries(false);
@@ -88,6 +96,7 @@ const Sidebar = ({ setCategory, setMainPage, setSeries }) => {
               <i className="bx bx-tv text-2xl font-thin "></i>
               <p
                 onClick={() => {
+                  navigate("/");
                   setCategory("tv_shows");
                   setMainPage(false);
                   setSeries(true);

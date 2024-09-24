@@ -2,7 +2,13 @@ import React from "react";
 import Movies from "./Movies";
 import { useState, useEffect } from "react";
 
-const MainPage = ({ category, mainPage, series }) => {
+const MainPage = ({
+  category,
+  mainPage,
+  series,
+  movieClicked,
+  setMovieClicked,
+}) => {
   const [movieData, setMovieData] = useState([]);
   const [searchItem, setSearchItem] = useState("");
   const [loading, setLoading] = useState(false);
@@ -122,6 +128,8 @@ const MainPage = ({ category, mainPage, series }) => {
         loading={loading}
         setCount={setCount}
         setGenre={setSelectedGenre}
+        movieClicked={movieClicked}
+        setMovieClicked={setMovieClicked}
       />
     </div>
   );
