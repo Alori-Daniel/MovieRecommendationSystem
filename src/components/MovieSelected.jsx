@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 
 const MovieSelected = () => {
   const location = useLocation();
   const { movie, genreNames } = location.state || {};
+  const [starClicked, setStarClicked] = useState(false);
   return (
-    <div className=" w-full bg-white  min-h-screen  border-2 border-green-400 relative flex items-center justify-center py-3">
+    <div className=" w-full bg-white  min-h-screen  relative flex items-center justify-center py-3">
       <div
         style={{
           backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
@@ -51,10 +52,22 @@ const MovieSelected = () => {
             <p>Genre : {genreNames}</p>
             <p>Release Date: {movie.release_date || movie.first_air_date}</p>
           </div>
-
-          <button className="text-white bg-red-600 bg-opacity-1 max-w-40 flex transition-all justify-center my-2 gap-2 items-center rounded-lg h-12 cursor-pointer hover:scale-105">
-            Watch Trailer <i className="bx bxl-youtube text-3xl"></i>
-          </button>
+          <div className=" px-2 flex gap-2 flex-wrap py-2">
+            <button className="text-white bg-red-600 bg-opacity-1 max-w-40 flex transition-all justify-center  gap-2 px-2 items-center rounded-lg h-12 cursor-pointer hover:scale-105 w-40">
+              Watch Trailer <i className="bx bxl-youtube text-3xl"></i>
+            </button>
+            <button
+              className="text-white bg-black bg-opacity-1 max-w-40 flex transition-all justify-center  gap-2 px-2 items-center rounded-lg h-12 cursor-pointer hover:scale-105 w-40"
+              onClick={() => setStarClicked((prev) => !prev)}
+            >
+              Favourite
+              {starClicked ? (
+                <i class="bx bxs-star text-2xl text-yellow-400"></i>
+              ) : (
+                <i className="bx bx-star text-2xl  "></i>
+              )}
+            </button>
+          </div>
         </div>
       </div>
     </div>

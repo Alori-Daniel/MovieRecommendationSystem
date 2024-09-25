@@ -5,6 +5,8 @@ import Sidebar from "./components/Sidebar";
 import MovieSelected from "./components/MovieSelected";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+export const Context = React.createContext();
+
 function App() {
   const [category, setCategory] = useState("now_playing");
   const [mainPage, setMainPage] = useState(true);
@@ -12,9 +14,10 @@ function App() {
   const [movieClicked, setMovieClicked] = useState(false);
   const [navShow, setNavShow] = useState(false);
   const [selection, setSelection] = useState("Discover");
+  const [list, setList] = useState(false);
 
   return (
-    <div className="flex ">
+    <Context.Provider value={{}} className="flex ">
       <Router>
         <Routes>
           <Route path="/movieinfo" element={<MovieSelected />}></Route>
@@ -29,6 +32,7 @@ function App() {
                   navShow={navShow}
                   setNavShow={setNavShow}
                   setSelection={setSelection}
+                  setList={setList}
                 />
                 <MainPage
                   category={category}
@@ -39,6 +43,7 @@ function App() {
                   setMovieClicked={setMovieClicked}
                   setNavShow={setNavShow}
                   selection={selection}
+                  list={list}
                 />
               </>
             }
@@ -57,7 +62,7 @@ function App() {
           setMovieClicked={setMovieClicked}
         />
       )} */}
-    </div>
+    </Context.Provider>
   );
 }
 

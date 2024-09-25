@@ -9,6 +9,7 @@ const Sidebar = ({
   navShow,
   setNavShow,
   setSelection,
+  setList,
 }) => {
   const navigate = useNavigate();
   return (
@@ -22,7 +23,7 @@ const Sidebar = ({
           className="absolute top-6 right-5"
           onClick={() => setNavShow((prev) => !prev)}
         >
-          <i class="bx bx-x-circle text-2xl cursor-pointer"></i>
+          <i className="bx bx-x-circle text-2xl cursor-pointer"></i>
         </div>
       ) : (
         ""
@@ -40,6 +41,7 @@ const Sidebar = ({
               setMainPage(true);
               setSeries(false);
               setSelection("Discover");
+              setList(false);
             }}
           >
             Films
@@ -52,11 +54,15 @@ const Sidebar = ({
               setMainPage(false);
               setSeries(true);
               setSelection("Tv Shows");
+              setList(false);
             }}
           >
             Series
           </p>
-          <p className="text-lg	font-medium hover:text-yellow-300 hover:cursor-pointer">
+          <p
+            className="text-lg	font-medium hover:text-yellow-300 hover:cursor-pointer"
+            onClick={() => setList(true)}
+          >
             My List
           </p>
         </div>
@@ -72,6 +78,7 @@ const Sidebar = ({
                   setMainPage(false);
                   setSeries(false);
                   setSelection("Popular");
+                  setList(false);
                 }}
               >
                 Popular
@@ -86,6 +93,7 @@ const Sidebar = ({
                   setMainPage(false);
                   setSeries(false);
                   setSelection("Top Rated");
+                  setList(false);
                 }}
               >
                 Top Rated
@@ -100,6 +108,7 @@ const Sidebar = ({
                   setMainPage(false);
                   setSeries(false);
                   setSelection("Upcoming");
+                  setList(false);
                 }}
               >
                 Upcoming
@@ -114,6 +123,7 @@ const Sidebar = ({
                   setMainPage(false);
                   setSeries(false);
                   setSelection("Now Playing");
+                  setList(false);
                 }}
               >
                 Now Playing
@@ -128,6 +138,7 @@ const Sidebar = ({
                   setMainPage(false);
                   setSeries(true);
                   setSelection("Tv Shows");
+                  setList(false);
                 }}
               >
                 Tv Shows

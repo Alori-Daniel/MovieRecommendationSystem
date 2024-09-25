@@ -11,6 +11,7 @@ const MainPage = ({
   setNavShow,
   navShow,
   selection,
+  list,
 }) => {
   const [movieData, setMovieData] = useState([]);
   const [searchItem, setSearchItem] = useState("");
@@ -34,7 +35,7 @@ const MainPage = ({
         url = `https://api.themoviedb.org/3/movie/${category}?api_key=6522eb56ca3e1a27a115cef700d64b8e&language=en-US&page=${count}`;
         if (genre) {
           url += `&with_genres=${genre}`;
-          console.log(url);
+          // console.log(url);
         }
       }
       const response = await fetch(url);
@@ -77,7 +78,7 @@ const MainPage = ({
       const response = await fetch(url);
       if (response.ok) {
         const result = await response.json();
-        console.log(result.results);
+        // console.log(result.results);
         setMovieData(result.results);
       } else {
         alert("error");
@@ -91,7 +92,7 @@ const MainPage = ({
   const handleInputChange = (event) => {
     const value = event.target.value;
     setSearchItem(value);
-    console.log(searchItem);
+    // console.log(searchItem);
     if (value.length > 2) {
       getSearchData(value);
     } else {
@@ -109,40 +110,51 @@ const MainPage = ({
       <div
         className="absolute top-7 left-10 hidden lg:block sm:left-4"
         onClick={() => {
-          setNavShow((prev) => !prev), console.log(navShow);
+          setNavShow((prev) => !prev);
         }}
       >
         <i className="bx bx-menu text-3xl hover:scale-105 cursor-pointer hover:rotate-180 transition-transform"></i>
       </div>
-      <div className="navbar flex items-center justify-between">
-        <div className="relative rounded-md w-56  md:ml-auto xi:w-40">
-          <i className="bx bx-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-xl"></i>
-          <input
-            type="text"
-            className="pl-10 pr-4 py-2 w-full border-b-2 outline-none"
-            placeholder="Search for a movie"
-            value={searchItem}
-            onChange={handleInputChange}
+      {list ? (
+        <div className="border-2">
+          <div>
+            <h1 className="font-vollkorn text-3xl">Your Favourite Movies</h1>
+            <p>Peace out</p>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <div className="navbar flex items-center justify-between">
+            <div className="relative rounded-md w-56  md:ml-auto xi:w-40">
+              <i className="bx bx-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-xl"></i>
+              <input
+                type="text"
+                className="pl-10 pr-4 py-2 w-full border-b-2 outline-none"
+                placeholder="Search for a movie"
+                value={searchItem}
+                onChange={handleInputChange}
+              />
+            </div>
+            <ul className="flex gap-3 text-[#382E6B] md:hidden">
+              <li>Films</li>
+              <li>Socials</li>
+              <li>Videos</li>
+              <li>News</li>
+              <li>About</li>
+            </ul>
+          </div>
+          <Movies
+            data={movieData}
+            genres={genres}
+            loading={loading}
+            setCount={setCount}
+            setGenre={setSelectedGenre}
+            movieClicked={movieClicked}
+            setMovieClicked={setMovieClicked}
+            selection={selection}
           />
         </div>
-        <ul className="flex gap-3 text-[#382E6B] md:hidden">
-          <li>Films</li>
-          <li>Socials</li>
-          <li>Videos</li>
-          <li>News</li>
-          <li>About</li>
-        </ul>
-      </div>
-      <Movies
-        data={movieData}
-        genres={genres}
-        loading={loading}
-        setCount={setCount}
-        setGenre={setSelectedGenre}
-        movieClicked={movieClicked}
-        setMovieClicked={setMovieClicked}
-        selection={selection}
-      />
+      )}
     </div>
   );
 };
