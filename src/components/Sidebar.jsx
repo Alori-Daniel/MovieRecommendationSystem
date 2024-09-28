@@ -30,7 +30,7 @@ const Sidebar = ({
       )}
       <div className=" w-full p-2 flex flex-col gap-4 h-screen ">
         <div className="flex flex-col gap-6  w-4/5 mx-auto md:w-full px-6 font-vollkorn">
-          <h1 className="text-3xl font-bold text-white mb-4 lg:text-2xl font-vollkorn">
+          <h1 className="text-3xl font-bold text-white mb-4 lg:text-2xl font-vollkorn animate-title">
             AJMOVIES
           </h1>
           <p
@@ -42,6 +42,7 @@ const Sidebar = ({
               setSeries(false);
               setSelection("Discover");
               setList(false);
+              setNavShow(false);
             }}
           >
             Films
@@ -55,13 +56,17 @@ const Sidebar = ({
               setSeries(true);
               setSelection("Tv Shows");
               setList(false);
+              setNavShow(false);
             }}
           >
             Series
           </p>
           <p
             className="text-lg	font-medium hover:text-yellow-300 hover:cursor-pointer"
-            onClick={() => setList(true)}
+            onClick={() => {
+              setList(true);
+              setNavShow(false);
+            }}
           >
             My List
           </p>
@@ -79,6 +84,7 @@ const Sidebar = ({
                   setSeries(false);
                   setSelection("Popular");
                   setList(false);
+                  setNavShow(false);
                 }}
               >
                 Popular
@@ -94,6 +100,7 @@ const Sidebar = ({
                   setSeries(false);
                   setSelection("Top Rated");
                   setList(false);
+                  setNavShow(false);
                 }}
               >
                 Top Rated
@@ -109,6 +116,7 @@ const Sidebar = ({
                   setSeries(false);
                   setSelection("Upcoming");
                   setList(false);
+                  setNavShow(false);
                 }}
               >
                 Upcoming
@@ -124,6 +132,7 @@ const Sidebar = ({
                   setSeries(false);
                   setSelection("Now Playing");
                   setList(false);
+                  setNavShow(false);
                 }}
               >
                 Now Playing
@@ -139,6 +148,7 @@ const Sidebar = ({
                   setSeries(true);
                   setSelection("Tv Shows");
                   setList(false);
+                  setNavShow(false);
                 }}
               >
                 Tv Shows

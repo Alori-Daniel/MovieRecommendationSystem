@@ -22,9 +22,31 @@ export default {
     },
     extend: {
       fontFamily: {
-        // Adding the custom font
         vollkorn: ["Vollkorn", "serif"],
         poppins: ["Poppins", "sans-serif"],
+      },
+      animation: {
+        title: "titleAnimation 5s ease-in-out infinite",
+      },
+      keyframes: {
+        titleAnimation: {
+          "0%, 100%": {
+            transform: "scale(1) rotate(0deg)",
+            color: "#ffffff", // Start and end with white
+          },
+          "25%": {
+            transform: "scale(1.2) rotate(1deg)",
+            color: "#f39c12", // Orange
+          },
+          "50%": {
+            transform: "scale(1) rotate(-1deg)",
+            color: "#e74c3c", // Red
+          },
+          "75%": {
+            transform: "scale(1.2) rotate(1deg)",
+            color: "#3498db", // Blue
+          },
+        },
       },
     },
   },

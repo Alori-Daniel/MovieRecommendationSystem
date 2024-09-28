@@ -1,6 +1,8 @@
 import React from "react";
 import Movies from "./Movies";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { Context } from "../App";
+import { useNavigate } from "react-router-dom";
 
 const MainPage = ({
   category,
@@ -13,100 +15,38 @@ const MainPage = ({
   selection,
   list,
 }) => {
-  const [movieData, setMovieData] = useState([]);
-  const [searchItem, setSearchItem] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [count, setCount] = useState(1);
-  const [genres, setGenres] = useState([]);
-  const [selectedGenre, setSelectedGenre] = useState(""); // For storing selected genre
+  const navigate = useNavigate();
 
-  const getData = async (category, count, genre = "") => {
-    setLoading(true);
-    try {
-      let url = "";
-      if (series) {
-        url = `https://api.themoviedb.org/3/discover/tv?api_key=6522eb56ca3e1a27a115cef700d64b8e&language=en-US&page=${count}`;
-      } else if (mainPage) {
-        url = `https://api.themoviedb.org/3/discover/movie?api_key=6522eb56ca3e1a27a115cef700d64b8e&language=en-US&page=${count}`;
-        if (genre) {
-          url += `&with_genres=${genre}`;
-        }
-      } else {
-        url = `https://api.themoviedb.org/3/movie/${category}?api_key=6522eb56ca3e1a27a115cef700d64b8e&language=en-US&page=${count}`;
-        if (genre) {
-          url += `&with_genres=${genre}`;
-          // console.log(url);
-        }
-      }
-      const response = await fetch(url);
-      if (response.ok) {
-        const result = await response.json();
-        setMovieData(result.results);
-      } else {
-        alert("error");
-      }
-    } catch {
-      alert("problem fetching");
-    }
-    setLoading(false);
-  };
-  const getGenres = async () => {
-    try {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/genre/movie/list?api_key=6522eb56ca3e1a27a115cef700d64b8e&language=en-US`
-      );
-      if (response.ok) {
-        const result = await response.json();
-        setGenres(result.genres);
-      } else {
-        alert("Error fetching genres");
-      }
-    } catch (error) {
-      alert("Problem fetching genres");
-    }
-  };
+  const {
+    movieData,
+    setMovieData,
+    searchItem,
+    setSearchItem,
+    loading,
+    setLoading,
+    count,
+    setCount,
+    genres,
+    setGenres,
+    selectedGenre,
+    setSelectedGenre,
+    handleInputChange,
+    getSearchData,
+    getData,
+    favouriteMovies,
+  } = useContext(Context);
 
-  const getSearchData = async (query) => {
-    setLoading(true);
-    try {
-      let url = "";
-      if (series) {
-        url = `https://api.themoviedb.org/3/search/tv?api_key=6522eb56ca3e1a27a115cef700d64b8e&language=en-US&query=${query}`;
-      } else {
-        url = `https://api.themoviedb.org/3/search/movie?api_key=6522eb56ca3e1a27a115cef700d64b8e&language=en-US&query=${query}`;
-      }
-      const response = await fetch(url);
-      if (response.ok) {
-        const result = await response.json();
-        // console.log(result.results);
-        setMovieData(result.results);
-      } else {
-        alert("error");
-      }
-    } catch {
-      alert("problem fetching");
-    }
-    setLoading(false);
+  const getGenreNames = (genre_ids) => {
+    return genre_ids
+      .map((id) => {
+        const genre = genres.find((genre) => genre.id === id);
+        return genre ? genre.name : "";
+      })
+      .join(", ");
   };
-
-  const handleInputChange = (event) => {
-    const value = event.target.value;
-    setSearchItem(value);
-    // console.log(searchItem);
-    if (value.length > 2) {
-      getSearchData(value);
-    } else {
-      getData(category, count);
-    }
-  };
-
-  useEffect(() => {
-    getData(category, count, selectedGenre);
-    getGenres();
-  }, [count, category, selectedGenre]);
 
   return (
-    <div className=" w-4/5 bg-white ml-[20%] border-2 border-green-400 px-24 py-8 lg:ml-0 lg:w-full relative md:py-5 md:px-5 ">
+    <div className=" w-4/5 bg-white ml-[20%]  px-24 py-8 lg:ml-0 lg:w-full relative md:py-5 md:px-5 ">
       <div
         className="absolute top-7 left-10 hidden lg:block sm:left-4"
         onClick={() => {
@@ -116,10 +56,64 @@ const MainPage = ({
         <i className="bx bx-menu text-3xl hover:scale-105 cursor-pointer hover:rotate-180 transition-transform"></i>
       </div>
       {list ? (
-        <div className="border-2">
-          <div>
-            <h1 className="font-vollkorn text-3xl">Your Favourite Movies</h1>
-            <p>Peace out</p>
+        <div className=" p-2">
+          <div className="flex flex-col justify-center items-center my-10">
+            <h1
+              className="font-vollkorn text-3xl"
+              onClick={() => console.log(movieData)}
+            >
+              Your Favourite Movies
+            </h1>
+            <h2>List of Movies</h2>
+          </div>
+          <div className="grid grid-cols-4 gap-8 md:grid-cols-2  ">
+            {favouriteMovies.map((movie, i) => {
+              return (
+                <div key={i} className=" rounded-2xl  p-1 flex flex-col gap-2 ">
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500${movie.poster}`}
+                    className="rounded-2xl shadow-lg hover:scale-105 hover:cursor-pointer transition-transform object-fill"
+                    alt=""
+                    onClick={() => {
+                      const genreNames = movie.genre;
+                      navigate("/movieinfo", { state: { movie, genreNames } });
+                    }}
+                  />
+                  <div className="flex justify-between flex-wrap">
+                    <h3 className="text-md text-[#1E195A] font-medium max-w-32 ">
+                      {movie.name}
+                    </h3>
+                    <p className="">
+                      {Array.from({ length: 5 }, (_, i) => {
+                        if (i < Math.floor(movie.ratings / 2)) {
+                          return (
+                            <span key={i} className="mr-[-3px]">
+                              <i className="bx bxs-star text-yellow-300"></i>
+                            </span>
+                          );
+                        } else if (i < movie.ratings / 2) {
+                          return (
+                            <span key={i} className="mr-[-3px]">
+                              <i className="bx bxs-star-half text-yellow-300"></i>
+                            </span>
+                          );
+                        } else {
+                          return (
+                            <span key={i} className="mr-[-3px]">
+                              <i className="bx bx-star text-gray-400"></i>
+                            </span>
+                          );
+                        }
+                      })}
+                    </p>
+                  </div>
+                  <p>Date: {movie.releaseDate}</p>
+                  {/* <p className="p-2 rounded-lg border-2 cursor-pointer">
+                  {getGenreNames(favMovie.genre_ids)}
+                </p> */}
+                </div>
+              );
+            })}
           </div>
         </div>
       ) : (
