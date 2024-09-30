@@ -34,40 +34,40 @@ const Movies = ({
     <div className="w-full  flex flex-col items-center gap-2 ">
       <div className="flex w-full justify-between  my-8 items-center gap-2   p-4 lg:flex-col">
         <h2
-          className="text-2xl font-vollkorn "
+          className="text-2xl font-vollkorn dark:text-white "
           onClick={() => {
             console.log(data);
           }}
         >
           {selection}
         </h2>
-        <div className="grid gap-6 self-center grid-cols-5 mi:grid-cols-3 xi:grid-cols-2">
+        <div className="grid gap-6 self-center grid-cols-5 mi:grid-cols-3 xi:grid-cols-2 ">
           <p
-            className="px-2 py-2 rounded-lg border-2 cursor-pointer hover:bg-blue-950 hover:text-white"
+            className="px-2 py-2 rounded-lg border-2 cursor-pointer hover:bg-blue-950 hover:text-white  dark:text-white"
             onClick={() => setGenre(28)}
           >
             Action
           </p>
           <p
-            className="px-2 py-2 rounded-lg border-2 cursor-pointer hover:bg-blue-950 hover:text-white"
+            className="px-2 py-2 rounded-lg border-2 cursor-pointer hover:bg-blue-950 hover:text-white dark:text-white"
             onClick={() => setGenre(10749)}
           >
             Romance
           </p>
           <p
-            className="px-2 py-2 rounded-lg border-2 cursor-pointer hover:bg-blue-950 hover:text-white"
+            className="px-2 py-2 rounded-lg border-2 cursor-pointer hover:bg-blue-950 hover:text-white dark:text-white"
             onClick={() => setGenre(878)}
           >
             Sci-Fi
           </p>
           <p
-            className="px-2 py-2 rounded-lg border-2 cursor-pointer hover:bg-blue-950 hover:text-white"
+            className="px-2 py-2 rounded-lg border-2 cursor-pointer hover:bg-blue-950 hover:text-white  dark:text-white"
             onClick={() => setGenre(35)}
           >
             Comedy
           </p>
           <p
-            className="px-2 py-2 rounded-lg border-2 cursor-pointer hover:bg-blue-950 hover:text-white"
+            className="px-2 py-2 rounded-lg border-2 cursor-pointer hover:bg-blue-950 hover:text-white dark:text-white"
             onClick={() => setGenre(53)}
           >
             Horror
@@ -75,7 +75,7 @@ const Movies = ({
         </div>
       </div>
       {loading ? (
-        <p>Loading movies.....</p>
+        <p className="dark:text-white">Loading movies.....</p>
       ) : data.length > 2 ? (
         <div className="grid grid-cols-4 gap-8 md:grid-cols-2  ">
           {data.map((movie, i) => {
@@ -88,7 +88,7 @@ const Movies = ({
                   onClick={() => handleMovieClick(movie)}
                 />
                 <div className="flex justify-between flex-wrap">
-                  <h3 className="text-md text-[#1E195A] font-medium max-w-32 ">
+                  <h3 className="text-md text-[#1E195A] font-medium max-w-32  dark:text-white ">
                     {movie.original_title || movie.original_name}
                   </h3>
                   <p className="">
@@ -115,8 +115,10 @@ const Movies = ({
                     })}
                   </p>
                 </div>
-                <p>Date: {movie.release_date || movie.first_air_date}</p>
-                <p className="p-2 rounded-lg border-2 cursor-pointer">
+                <p className=" dark:text-white">
+                  Date: {movie.release_date || movie.first_air_date}
+                </p>
+                <p className="p-2 rounded-lg border-2 cursor-pointer  dark:text-white">
                   {getGenreNames(movie.genre_ids)}
                 </p>
               </div>
@@ -124,10 +126,15 @@ const Movies = ({
           })}
         </div>
       ) : (
-        <p className="text-center text-3xl">No movie found</p>
+        <p className="text-center text-3xl dark:text-white">No movie found</p>
       )}
 
-      <Pagination defaultCurrent={1} total={50} onChange={handlePageChange} />
+      <Pagination
+        defaultCurrent={1}
+        total={50}
+        onChange={handlePageChange}
+        className=" dark:bg-white"
+      />
     </div>
   );
 };

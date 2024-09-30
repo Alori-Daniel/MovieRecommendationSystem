@@ -14,7 +14,7 @@ const Sidebar = ({
   const navigate = useNavigate();
   return (
     <div
-      className={`h-screen bg-blue-950 w-1/5 border-gray-900  flex flex-col items-center py-8 text-white fixed top-0 left-0 z-10 lg:w-64 sm:w-56 sm:overflow-y-auto transition-all duration-400 ease-in-out ${
+      className={`h-screen bg-blue-950 w-1/5  dark:bg-white  dark:text-blue-950 border-gray-900  flex flex-col items-center py-8 text-white fixed top-0 left-0 z-10 lg:w-64 sm:w-56 sm:overflow-y-auto transition-all duration-400 ease-in-out ${
         navShow ? "lg:left-0" : "lg:-left-full"
       }`}
     >
@@ -161,17 +161,27 @@ const Sidebar = ({
           </div>
         </div>
         <div className="icons flex w-4/5 mx-auto  gap-2 justify-center">
-          <div className="bg-white rounded-full w-7 h-7 flex justify-center items-center">
-            <i className="bx bxl-facebook text-blue-600"></i>
+          <div className="bg-white rounded-full w-7 h-7 flex justify-center items-center hover:scale-125">
+            <a href="https://web.facebook.com/daniel.alori.16" target="_blank">
+              <i className="bx bxl-facebook text-blue-600"></i>
+            </a>
           </div>
-          <div className="bg-white rounded-full w-7 h-7 flex justify-center items-center">
-            <i className="bx bx-envelope text-gray-800"></i>
+          <div className="bg-white rounded-full w-7 h-7 flex justify-center items-center hover:scale-125">
+            <a href="mailto:aloridaniel123@gmail.com" target="_blank">
+              <i className="bx bx-envelope text-gray-800"></i>
+            </a>
           </div>
-          <div className="bg-white rounded-full w-7 h-7 flex justify-center items-center">
-            <i className="bx bxl-instagram text-red-300"></i>
+          <div className="bg-white rounded-full w-7 h-7 flex justify-center items-center hover:scale-125">
+            <a href="https://www.instagram.com/daniel_alori/" target="_blank">
+              {" "}
+              <i className="bx bxl-instagram text-red-300"></i>
+            </a>
           </div>
-          <div className="bg-white rounded-full w-7 h-7 flex justify-center items-center">
-            <i className="bx bxl-twitter text-blue-400"></i>
+          <div className="bg-white rounded-full w-7 h-7 flex justify-center items-center hover:scale-125">
+            <a href="https://x.com/AloriDaniel" target="_blank">
+              {" "}
+              <i className="bx bxl-twitter text-blue-400 "></i>
+            </a>
           </div>
         </div>
       </div>

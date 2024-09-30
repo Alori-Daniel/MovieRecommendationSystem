@@ -16,6 +16,11 @@ const MainPage = ({
   list,
 }) => {
   const navigate = useNavigate();
+  const [dark, setDark] = useState(false);
+  const toggleTheme = () => {
+    setDark(!dark);
+    document.body.classList.toggle("dark");
+  };
 
   const {
     movieData,
@@ -46,7 +51,7 @@ const MainPage = ({
   };
 
   return (
-    <div className=" w-4/5 bg-white ml-[20%]  px-24 py-8 lg:ml-0 lg:w-full relative md:py-5 md:px-5 ">
+    <div className=" w-4/5 bg-white ml-[20%]  px-24 py-8 lg:ml-0 lg:w-full relative md:py-5 md:px-5 dark:bg-black ">
       <div
         className="absolute top-7 left-10 hidden lg:block sm:left-4"
         onClick={() => {
@@ -123,19 +128,25 @@ const MainPage = ({
               <i className="bx bx-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-xl"></i>
               <input
                 type="text"
-                className="pl-10 pr-4 py-2 w-full border-b-2 outline-none"
+                className="pl-10 pr-4 py-2 w-full border-b-2 outline-none  dark:border-b-white dark:bg-black dark:text-white"
                 placeholder="Search for a movie"
                 value={searchItem}
                 onChange={handleInputChange}
               />
             </div>
-            <ul className="flex gap-3 text-[#382E6B] md:hidden">
-              <li>Films</li>
-              <li>Socials</li>
-              <li>Videos</li>
-              <li>News</li>
-              <li>About</li>
-            </ul>
+            <div className=" w-20">
+              {dark ? (
+                <i
+                  class="bx bx-sun text-3xl dark:text-white hover:cursor-pointer"
+                  onClick={toggleTheme}
+                ></i>
+              ) : (
+                <i
+                  class="bx bxs-sun dark:text-white text-3xl hover:cursor-pointer"
+                  onClick={toggleTheme}
+                ></i>
+              )}
+            </div>
           </div>
           <Movies
             data={movieData}

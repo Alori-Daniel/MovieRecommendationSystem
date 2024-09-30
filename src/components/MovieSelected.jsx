@@ -109,9 +109,9 @@ const MovieSelected = () => {
               onClick={() => {
                 handleAddFavourite();
                 if (favouriteMovies.some((fav) => fav.id === movie.id)) {
-                  toast.info("Removed to Favourites");
+                  toast.info("Removed From Favourites");
                 } else {
-                  toast.success("Added From Favourites");
+                  toast.success("Added to Favourites");
                 }
               }}
             >
