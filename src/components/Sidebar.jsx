@@ -14,7 +14,7 @@ const Sidebar = ({
   const navigate = useNavigate();
   return (
     <div
-      className={`h-screen bg-blue-950 w-1/5  dark:bg-white  dark:text-blue-950 border-gray-900  flex flex-col items-center py-8 text-white fixed top-0 left-0 z-10 lg:w-64 sm:w-56 sm:overflow-y-auto transition-all duration-400 ease-in-out ${
+      className={`h-screen bg-blue-950 w-1/5  dark:bg-white z-20 dark:text-blue-950 border-gray-900  flex flex-col items-center py-8 text-white fixed top-0 left-0 z-10 lg:w-64 sm:w-56 sm:overflow-y-auto transition-all duration-400 ease-in-out ${
         navShow ? "lg:left-0" : "lg:-left-full"
       }`}
     >

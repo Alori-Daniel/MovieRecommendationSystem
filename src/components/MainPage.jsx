@@ -53,7 +53,7 @@ const MainPage = ({
   return (
     <div className=" w-4/5 bg-white ml-[20%]  px-24 py-8 lg:ml-0 lg:w-full relative md:py-5 md:px-5 dark:bg-black ">
       <div
-        className="absolute top-7 left-10 hidden lg:block sm:left-4"
+        className="absolute top-7 left-10 hidden lg:block sm:left-4 z-10 dark:text-white"
         onClick={() => {
           setNavShow((prev) => !prev);
         }}
@@ -62,9 +62,9 @@ const MainPage = ({
       </div>
       {list ? (
         <div className=" p-2">
-          <div className="flex flex-col justify-center items-center my-10">
+          <div className="flex flex-col justify-center items-center my-10 dark:text-white">
             <h1
-              className="font-vollkorn text-3xl"
+              className="font-vollkorn text-3xl "
               onClick={() => console.log(movieData)}
             >
               Your Favourite Movies
@@ -123,8 +123,8 @@ const MainPage = ({
         </div>
       ) : (
         <div>
-          <div className="navbar flex items-center justify-between">
-            <div className="relative rounded-md w-56  md:ml-auto xi:w-40">
+          <div className="navbar flex items-center justify-between ">
+            <div className="relative rounded-md w-56 md:ml-auto  items-center xi:w-40">
               <i className="bx bx-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-xl"></i>
               <input
                 type="text"
@@ -134,15 +134,15 @@ const MainPage = ({
                 onChange={handleInputChange}
               />
             </div>
-            <div className=" w-20">
+            <div className="ml-6">
               {dark ? (
                 <i
-                  class="bx bx-sun text-3xl dark:text-white hover:cursor-pointer"
+                  className="bx bx-sun text-3xl dark:text-white hover:cursor-pointer"
                   onClick={toggleTheme}
                 ></i>
               ) : (
                 <i
-                  class="bx bxs-sun dark:text-white text-3xl hover:cursor-pointer"
+                  className="bx bxs-sun dark:text-white text-3xl hover:cursor-pointer"
                   onClick={toggleTheme}
                 ></i>
               )}
